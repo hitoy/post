@@ -38,4 +38,4 @@ jQuery.fn=jQuery.prototype={
 }
 jQuery.fn.init.prototype=jQuery.fn;
 
-这里有几点做得非常巧妙的地方,第一点是通过jQuery原型属性的init方法来创建对象来达到不用new创建对象的目的，第二点是用
+这里有几点做得非常巧妙的地方,第一点是通过jQuery原型属性的init方法来创建对象来达到不用new创建对象的目的，第二点是·
