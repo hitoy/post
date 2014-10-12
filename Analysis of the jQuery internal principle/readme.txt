@@ -1,2 +1,41 @@
-jQueryå†…éƒ¨åŸç†æµ…æ
-è¿™æ®µæ—¶é—´åœ¨å­¦ä¹ ç ”ç©¶jQueryæºç ï¼Œå—ç›ŠäºjQueryæ—¥ç›Šå‘å±•å¼ºå¤§ï¼Œç ”ç©¶jQueryçš„å¤§ç‰›è¶Šæ¥è¶Šå¤šï¼Œèµ„æ–™ä¹Ÿæ¯”å‰ä¸¤å¹´å¥½æ‰¾äº†ï¼Œæœ‰å¾ˆå¤šéå¸¸ä¸é”™çš„èµ„æºï¼Œå¦‚é«˜äº‘çš„jQuery1.6.1æºç åˆ†æç³»åˆ—ï¼ˆhttp://www.cnblogs.com/nuysoft/archive/2011/11/14/2248023.htmlï¼‰
+jQueryÄÚ²¿Ô­ÀíÇ³Îö
+Õâ¶ÎÊ±¼äÔÚÑ§Ï°ÑĞ¾¿jQueryÔ´Âë£¬ÊÜÒæÓÚjQueryÈÕÒæ·¢Õ¹Ç¿´ó£¬ÑĞ¾¿jQueryµÄ´óÅ£Ô½À´Ô½¶à£¬Ñ§Ï°µÄ×ÊÁÏÒ²±ÈÇ°Á½ÄêºÃÕÒÁË£¬ÓĞºÜ¶à·Ç³£²»´íµÄ×ÊÔ´£¬Èç¸ßÔÆµÄjQuery1.6.1Ô´Âë·ÖÎöÏµÁĞ£¨http://www.cnblogs.com/nuysoft/archive/2011/11/14/2248023.html£©¡£ÕâĞ©½Ì³Ì·Ç³£Ï¸ÖÂµÄ·ÖÎöÁËjQueryÄÚ²¿Ô­ÀíºÍÊµÏÖ·½Ê½£¬¶ÔÑ§Ï°ºÍÀí½âjQueryÓĞ·Ç³£´óµÄ°ïÖú¡£µ«ÊÇ¸öÈËÈÏÎªºÜ¶à½Ì³Ì¶ÔjQueryµÄÕûÌå½á¹û°ÑÎÕ²»×ã£¬±¾ÈËÊÔÍ¼´ÓÕûÌåÀ´²ûÊöÒ»ÏÂjQueryµÄÄÚ²¿ÊµÏÖ¡£
+
+´ó¼ÒÖªµÀ£¬µ÷ÓÃjQueryÓĞÁ½ÖÖ·½Ê½£¬Ò»ÖÖÊÇ¸ß¼¶µÄÊµÏÖ£¬Í¨¹ı´«µİÒ»¸ö²ÎÊıÊµÏÖDOMÑ¡Ôñ£¬ÈçÍ¨¹ı$("h1")Ñ¡ÔñËùÓĞµÄh1ÔªËØ£¬µÚ¶şÖÖÊÇ½ÏÎªµÍ¼¶µÄÊµÏÖ£¬Èç¹ûÍ¨¹ı$.ajaxÊµÏÖajaxµÄ²Ù×÷¡£ÄÇÃ´£¬ÕâÁ½ÖÖ·½Ê½µ½µ×ÓĞºÎ²»Í¬£¿ÓÃtypeofº¯Êı¼ì²â$('h1')ºÍ$.ajax,ÀàĞÍ·Ö±ğÎªobjectºÍfunction£¬ÉÔÎ¢Ñ§¹ıjQueryµÄ¶¼ÖªµÀ»òÕßÌı¹ı¹ı£¬Ç°Õß·µ»ØµÄÊÇÒ»¸öjQuery¶ÔÏó£¬ÄÇÃ´jQuery¶ÔÏóÊÇÊ²Ã´£¬ËüºÍjQueryÊÇÊ²Ã´¹ØÏµÄØ£¿ÎÒÃÇÏÈÀ´Í¨¹ıfor
+(var i in $('')) document.write(i+"  :::
+"+$("")[i]+"<br/>");´òÓ¡Ò»ÏÂjQuery¶ÔÏóµÄÊôĞÔºÍ¶ÔÓ¦µÄÖµ,¿ÉÒÔ¿´µ½ËüÓĞ100¶à¸öÊôĞÔ£¬Í¨¹ıconsoleÊäÈë$("*")¿ÉÒÔ¿´µ½´ó²¿·ÖÊôĞÔÊÇ¼Ì³Ğ×ÔjQueryÔ­ĞÍµÄÊôĞÔ£¬jQuery¶ÔÏóÊµ¼ÊÉÏÊÇÕâÑùÒ»¸ö¶ÔÏó:
+<img src='jQuery-Object.png'/>
+
+
+ËùÒÔÎÒÃÇÀ´ÍÆ²â£¬jQueryµÄÊµÏÖ¿ÉÄÜÊÇÀàËÆÕâÑùµÄ£º
+function jQuery(){
+	this[0]="Some DOM Element";
+	this[1]="Some DOM Element";
+	this[2]="Some DOM Element";
+	this.length=3;
+	this.prevObject="Some Object";
+	this.context="Some Object";
+	this.selector="Some selector";
+}
+jQuery.prototype={
+get:function(){},
+each:function(){},
+......
+}
+ÕâĞ©´úÂëÍ¨¹ınew²Ù×÷·û¾Í¾ÍÄÜ´´½¨³öÓµÓĞÉÏÊöÊôĞÔµÄjQuery¶ÔÏó,µ«ÊÇÊµ¼ÊÉÏÎÒÃÇµ÷ÓÃjQuery´´½¨jQuery¶ÔÏóÊ±²¢Ã»ÓĞÊ¹ÓÃnew²Ù×÷·û£¬ÕâÊÇÈçºÎÊµÏÖµÄÄØ£¿À´¿´jQueryµÄÊµÏÖ:
+var jQuery = function( selector, context ) {
+		// The jQuery object is actually just the init constructor 'enhanced'
+		return new jQuery.fn.init( selector, context, rootjQuery );
+}
+jQuery.fn=jQuery.prototype={
+	jquery: core_version,
+	init:function(selector,context){
+		//some code
+		return this;
+	}
+	//some code there
+	//......
+}
+jQuery.fn.init.prototype=jQuery.fn;
+
+
