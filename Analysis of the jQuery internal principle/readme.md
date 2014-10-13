@@ -2,7 +2,7 @@
 
 大家知道，调用jQuery有两种方式，一种是高级的实现，通过传递一个参数实现DOM选择，如通过$("h1")选择所有的h1元素，第二种是较为低级的实现，如果通过$.ajax实现ajax的操作。那么，这两种方式到底有何不同？用typeof函数检测$('h1')和$.ajax,类型分别为object和function，稍微学过jQuery的都知道或者听过过，前者返回的是一个jQuery对象，那么jQuery对象是什么，它和jQuery是什么关系呢？我们先来通过for(var i in $('')) document.write(i+" :::"+$("")[i]+"");打印一下jQuery对象的属性和对应的值,可以看到它有100多个属性，通过console输入$("*")可以看到大部分属性是继承自jQuery原型的属性，jQuery对象实际上是这样一个对象:
 
-![image](https://github.com/hitoy/post/blob/master/Analysis%20of%20the%20jQuery%20internal%20principle/jQuery-Object.png)
+![image](http://www.hitoy.org/wp-content/uploads/jQuery-Object.png)
 
 所以我们来推测，jQuery的实现可能是类似这样的：
 <pre language='javascript'>
@@ -43,4 +43,5 @@ jQuery.fn.init.prototype=jQuery.fn;
 到这里，一个jQuery的基本原型就浮出水面了。这里有两个对象，一个是jQuery这个构造函数，另外一个是这个构造函数产生的对象(我们称之为jQuery对象，它和普通对象没有什么区别), 如下关系图:
 
 ![image](http://www.hitoy.org/wp-content/uploads/jQuery-construct.png)
+
 可以看到jQuery构造函数和jQuery.prototype均有各自的属性和方法，两者的调用方法各不一样,这两个对象都有一个extend方法，都是用来扩展自身的属性和方法，在jQuery内部，extend的实现实际是靠一样的代码, 将在后面的源码分析中做以详细的分析。
