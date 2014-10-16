@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="keywords" content=" "/>
+	<meta name="description" content=" "/>
+</head>
+<body>
+<script>	
+	var jQuery =function(){
+		this.name='Hito';
+		return this;
+	}
+jQuery.extend = jQuery.prototype.extend = function(obj){
+	//obj是传递过来扩展到this上的对象
+	var target=this;
+	for (var name in obj){
+			//name为对象属性
+			//copy为属性值
+			copy=obj[name];
+			//防止循环调用
+			if(target === copy) continue;
+			//防止附加未定义值
+			if(typeof copy === 'undefined') continue;
+			//赋值
+			target[name]=copy;
+	}
+	return target;
+}
+
+var a= new jQuery();
+a.extend({
+	say:function(){
+		return this.name;
+	}
+})
+
+</script>
+</body>
+</html>
