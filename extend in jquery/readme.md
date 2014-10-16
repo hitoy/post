@@ -32,7 +32,7 @@ jQuery.fn.extend({
 })
 $( "input[type='checkbox']" ).check(); //所有的checkbox都会被选择
 </pre>
-注意两种调用插件的方式，一种是直接用$调用，另外一种是用$()调用，另外jQuery.extend()接收多个对象作为参数，如果只有一个参数，则把这个对象的属性方法附加到jQuery上，如果含有多个参数，则把后面的对象的属性和方法附加到第一个对象上。我看一下extend的实现源码:
+注意两种调用插件的方式，一种是直接用$调用，另外一种是用$()调用，另外jQuery.extend()接收多个对象作为参数，如果只有一个参数，则把这个对象的属性方法附加到jQuery上，如果含有多个参数，则把后面的对象的属性和方法附加到第一个对象上。jQuery extend的实现源码:
 <pre language="javascript">
 jQuery.extend = jQuery.fn.extend = function() {
 	var options, name, src, copy, copyIsArray, clone,
@@ -117,3 +117,79 @@ jQuery.extend = jQuery.fn.extend = function(obj){
 	return target;
 }
 </pre>
+下面再来对extend方法进行注释解释:
+<pre language="javascript">
+jQuery.extend = jQuery.fn.extend = function() {
+	// 定义默认参数和变量
+	// 对象分为扩展对象和被扩展的对象 
+	//options 代表扩展的对象中的方法
+	//name 代表扩展对象的方法名
+	//i		为扩展对象参数起始值
+	//deep 默认为浅复制
+	var options, name, src, copy, copyIsArray, clone,
+		target = arguments[0] || {},
+		i = 1,
+		length = arguments.length,
+		deep = false;
+
+	//当第一个参数为布尔类型是，次参数定义是否为深拷贝
+	//对接下来的参数进行处理
+	if ( typeof target === "boolean" ) {
+		deep = target;
+		target = arguments[1] || {};
+		// 当定义是否深拷贝时，参数往后移动一位
+		i = 2;
+	}
+
+	// 如果要扩展的不是对象或者函数，则定义要扩展的对象为空
+	if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
+		target = {};
+	}
+
+	// 当只含有一个参数时，被扩展的对象是jQuery或jQuery.fn
+	if ( length === i ) {
+		target = this;
+		--i;
+	}
+
+	//对从i开始的多个参数进行遍历
+	for ( ; i < length; i++ ) {
+		// 只处理有定义的值
+		if ( (options = arguments[ i ]) != null ) {
+			// 展开扩展对象
+			for ( name in options ) {
+				src = target[ name ];
+				copy = options[ name ];
+
+				// 防止循环引用
+				if ( target === copy ) {
+					continue;
+				}
+
+				// 递归处理深拷贝
+				if ( deep && copy && ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
+					if ( copyIsArray ) {
+						copyIsArray = false;
+						clone = src && jQuery.isArray(src) ? src : [];
+
+					} else {
+						clone = src && jQuery.isPlainObject(src) ? src : {};
+					}
+
+					target[ name ] = jQuery.extend( deep, clone, copy );
+
+				// 不处理未定义值
+				} else if ( copy !== undefined ) {
+					//给target增加属性或方法
+					target[ name ] = copy;
+				}
+			}
+		}
+	}
+
+	//返回
+	return target;
+};
+</pre>
+
+弄懂了jQuery扩展的原理，相信以后再也不用为编写jQuery插件而烦恼了。
